@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GiardDesign</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;1,500&family=Montserrat:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css"
+      integrity="sha512-nNlU0WK2QfKsuEmdcTwkeh+lhGs6uyOxuUs+n+0oXSYDok5qy0EI0lt01ZynHq6+p/tbgpZ7P+yUb+r71wqdXg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Inline Styles -->
+
+    <style type="text/tailwindcss">
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      @layer utilities {
+        .h-odd-nav {
+          height: calc(100svh - 72px);
+        }
+
+        .w-sm-btn {
+          width: calc(100vw - 122px);
+        }
+
+        .galery-gradient {
+          background-image: linear-gradient(
+            360deg,
+            #dcc1ab 0%,
+            rgba(214, 183, 158, 0) 100%
+          );
+        }
+      }
+    </style>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"
+      integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Tailwind Configuration -->
+
+    <script>
+      tailwind.config = {
+        theme: {
+          colors: {
+            grey: "#F5F0EC",
+            black: " #111111",
+            green: "#1B5B31",
+            white: "#FFFFFF",
+            beige: "#DCC1AB",
+          },
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              serif: ["Montserrat", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- AOS Configuration -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  </head>
+
+  <body class="overflow-x-hidden bg-white text-black">
+    <nav
+      class="sticky top-0 z-20 flex w-full justify-center bg-white px-4 sm:px-6"
+    >
+      <div
+        class="flex h-[72px] w-full max-w-7xl select-none items-center justify-between"
+      >
+        <a href="#">
+          <img src="assets/images/logos/logo.png" alt="GiardDesign logo" />
+        </a>
+        <ul class="flex items-center gap-6 sm:gap-12">
+          <li class="hidden sm:block">
+            <a
+              class="flex cursor-pointer items-center gap-1 text-sm leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+              id="menu-offer"
+              >Oferta
+              <img
+                src="assets/images/icons/more.png"
+                alt="more icon"
+                class="h-3 w-3"
+            /></a>
+          </li>
+          <li class="hidden sm:block">
+            <a
+              href="#"
+              class="text-sm leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+              >O firmie</a
+            >
+          </li>
+          <li class="hidden sm:block">
+            <a
+              href="#"
+              class="text-sm leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+              >Realizacje</a
+            >
+          </li>
+          <li class="hidden sm:block">
+            <a
+              href="#"
+              class="text-sm leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+              >Kontakt</a
+            >
+          </li>
+          <li>
+            <a href="#" class="duration-300 hover:opacity-80" id="search">
+              <img src="assets/images/icons/search.png" alt="search icon" />
+            </a>
+          </li>
+          <li class="block sm:hidden">
+            <a class="cursor-pointer duration-300 hover:opacity-80" id="menu">
+              <img
+                src="assets/images/icons/menu.png"
+                alt="hamburger icon"
+                id="hamburger"
+              />
+              <img
+                src="assets/images/icons/close.png"
+                alt="close icon"
+                class="hidden"
+                id="close"
+              />
+            </a>
+          </li>
+        </ul>
+        <div
+          class="absolute right-0 top-0 -z-10 flex h-full w-0 p-3 duration-500"
+          id="expanded-search"
+        >
+          <input
+            type="text"
+            id="search-input"
+            class="border-grey w-full border-b-2 focus:outline-none"
+            placeholder="Szukaj frazy"
+          />
+          <a
+            class="flex h-full cursor-pointer items-center bg-white duration-300"
+            id="close-search"
+          >
+            <img
+              src="assets/images/icons/close.png"
+              alt="close icon"
+              id="close"
+            />
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      class="fixed -z-10 h-0 w-full bg-black duration-700"
+      id="overlay-offer"
+    >
+      <ul
+        class="text-grey flex h-full w-full items-center justify-center gap-12"
+      >
+        <li>
+          <a
+            href="#"
+            class="text-sm leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+            >Projekty</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="text-sm leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+            >Wizualizacje</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="text-sm leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+            >Realizacje</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div
+      class="fixed -z-10 h-0 w-full bg-black duration-1000"
+      id="overlay-menu"
+    >
+      <ul
+        class="text-grey flex h-full flex-col items-center justify-center gap-12"
+      >
+        <li>
+          <a
+            href="#"
+            class="flex items-center gap-1 text-2xl leading-normal tracking-[-0.24px] duration-300 hover:opacity-80"
+            id="mobile-menu-offer"
+            >Oferta
+            <img
+              src="assets/images/icons/more.png"
+              alt="more icon"
+              class="h-6 w-6 invert"
+          /></a>
+        </li>
+        <div class="hidden h-0 w-full duration-700" id="sub-menu-offer">
+          <ul
+            class="flex h-full w-full flex-col items-center justify-center gap-12"
+          >
+            <li>
+              <a
+                href="#"
+                class="text-sm leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+                >Projekty</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-sm leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+                >Wizualizacje</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-sm leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+                >Realizacje</a
+              >
+            </li>
+          </ul>
+        </div>
+        <li>
+          <a
+            href="#"
+            class="text-2xl leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+            >O firmie</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="text-2xl leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+            >Realizacje</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="text-2xl leading-normal tracking-[-0.14px] duration-300 hover:opacity-80"
+            >Kontakt</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <swiper-container id="swiper-hero" loop="true">
+        <swiper-slide
+          class="bg-beige h-odd-nav flex w-full flex-col-reverse sm:flex-row"
+        >
+          <div
+            class="flex h-min w-full flex-col items-baseline justify-center gap-8 px-4 py-6 sm:h-full sm:w-3/5 sm:items-center sm:gap-[72px] sm:p-6 lg:w-1/2"
+            data-aos="fade-right"
+          >
+            <div class="flex w-full max-w-screen-sm flex-col gap-6 sm:gap-11">
+              <div
+                class="font-serif text-4xl font-medium leading-10 sm:text-5xl sm:leading-[70px] lg:text-6xl"
+              >
+                Nowoczesna aranżacja Twojego ogrodu
+              </div>
+              <div class="text-sm sm:text-base">
+                Marka GiardDesign to wieloletnie doświadczenie i wysoka estetyka
+                realizacji. Oferujemy kompleksowy zakres usług z indywidualnym
+                podejściem do każdego projektu.
+              </div>
+            </div>
+            <div
+              class="w-sm-btn flex flex-col flex-wrap gap-9 sm:w-full sm:max-w-[350px] sm:flex-row lg:max-w-screen-sm"
+            >
+              <a
+                href="#"
+                class="bg-green text-grey hover:text-green flex select-none items-center justify-center gap-2 rounded-full px-6 pb-[14px] pt-3 text-base duration-300 hover:bg-white"
+                >Skontaktuj się z nami</a
+              >
+              <a
+                href="#"
+                class="border-green text-green flex select-none items-center justify-center gap-2 rounded-full border-[1px] px-6 pb-[14px] pt-3 text-base duration-300 hover:bg-white"
+              >
+                Zobacz nasze realizacje
+                <img
+                  src="assets/images/icons/arrow-tiny.png"
+                  alt="download icon"
+                  class="h-4 w-4"
+                />
+              </a>
+            </div>
+          </div>
+          <img
+            src="assets/images/hero.jpg"
+            alt="garden image"
+            class="h-auto w-full select-none object-cover sm:h-full sm:w-1/2"
+          />
+        </swiper-slide>
+        <swiper-slide
+          class="bg-beige h-odd-nav flex w-full flex-col-reverse sm:flex-row"
+        >
+          <div
+            class="flex h-min w-full flex-col items-baseline justify-center gap-8 px-4 py-6 sm:h-full sm:w-3/5 sm:items-center sm:gap-[72px] sm:p-6 lg:w-1/2"
+          >
+            <div class="flex w-full max-w-screen-sm flex-col gap-6 sm:gap-11">
+              <div
+                class="font-serif text-4xl font-medium leading-10 sm:text-5xl sm:leading-[70px] lg:text-6xl"
+              >
+                Projekty Stworzone dla Ciebie
+              </div>
+              <div class="text-sm sm:text-base">
+                Nie wierzymy w jednostronne podejście do projektowania ogrodów.
+                Dlatego każdy projekt traktujemy jako unikalne wyzwanie,
+                dopasowując nasze pomysły do Twoich potrzeb i wizji. Tworzymy
+                przestrzenie, które nie tylko zachwycają oko, ale także
+                odzwierciedlają Twój charakter i styl życia.
+              </div>
+            </div>
+            <div
+              class="w-sm-btn flex flex-col flex-wrap gap-9 sm:w-full sm:max-w-[350px] sm:flex-row lg:max-w-screen-sm"
+            >
+              <a
+                href="#"
+                class="bg-green text-grey hover:text-green flex select-none items-center justify-center gap-2 rounded-full px-6 pb-[14px] pt-3 text-base duration-300 hover:bg-white"
+                >Skontaktuj się z nami</a
+              >
+              <a
+                href="#"
+                class="border-green text-green flex select-none items-center justify-center gap-2 rounded-full border-[1px] px-6 pb-[14px] pt-3 text-base duration-300 hover:bg-white"
+              >
+                Zobacz nasze realizacje
+                <img
+                  src="assets/images/icons/arrow-tiny.png"
+                  alt="download icon"
+                  class="h-4 w-4"
+                />
+              </a>
+            </div>
+          </div>
+          <img
+            src="assets/images/gallery/photo6.jpg"
+            alt="garden image"
+            class="h-full w-full select-none object-cover sm:h-full sm:w-1/2"
+          />
+        </swiper-slide>
+      </swiper-container>
+      <div
+        class="bg-grey absolute bottom-0 right-0 z-[2] hidden sm:flex h-[155px] w-[74px] select-none flex-col items-center justify-between gap-8 py-[30px] sm:h-auto sm:w-auto sm:flex-row sm:px-8 sm:py-6"
+      >
+        <a id="swiper-prev"
+          ><img
+            src="assets/images/icons/arrow.png"
+            alt="left arrow icon"
+            class="cursor-pointer duration-300 hover:opacity-80"
+        /></a>
+        <a id="swiper-next"
+          ><img
+            src="assets/images/icons/arrow.png"
+            alt="right arrow icon"
+            class="rotate-180 cursor-pointer duration-300 hover:opacity-80"
+        /></a>
+      </div>
+    </div>
+
+    <div
+      class="bg-grey flex w-full flex-col items-center gap-12 py-6 sm:gap-24 sm:pb-[160px] sm:pt-[120px]"
+    >
+      <div
+        class="flex w-full max-w-[1024px] flex-col items-start gap-4 p-4 sm:px-6"
+        data-aos="fade-right"
+      >
+        <span class="text-green text-xs leading-[-0.12px]">Oferta</span>
+        <div class="flex w-full max-w-[709px] flex-col items-start gap-8">
+          <div
+            class="font-serif text-4xl font-medium leading-[115%] tracking-[-1.44px] sm:text-5xl"
+          >
+            Działamy <span class="italic">kompleksowo</span>
+          </div>
+          <div class="text-sm tracking-[-0.16px] sm:text-base">
+            Oferujemy kompletną obsługę inwestycji terenów zielonych.
+            Projektujemy nowoczesne ogrody przydomowe oraz rezydencjonalne.
+            Stworzymy dla Ciebie projekt, zwizualizujemy go i wcielimy w życie,
+            a na każdym etapie posłużymy radą i wieloletnim doświadczeniem.
+          </div>
+        </div>
+      </div>
+      <swiper-container
+        data-aos="slide-up"
+        space-between="30"
+        slides-per-view="auto"
+        class="w-full select-none lg:w-fit"
+      >
+        <swiper-slide
+          class="m-2 ml-6 flex h-[370px] min-w-[286px] max-w-xs flex-col items-start justify-between rounded-[28px] bg-white px-10 py-12 duration-300 hover:shadow-md"
+        >
+          <div class="flex flex-col items-start gap-8">
+            <img
+              src="assets/images/icons/project.png"
+              alt="project icon"
+              class="h-11 w-11 object-contain"
+            />
+            <div class="flex flex-col gap-3">
+              <div
+                class="font-serif text-[28px] font-medium leading-[115%] tracking-[-1.4px]"
+              >
+                Projekty
+              </div>
+              <div class="text-sm tracking-[-0.14px]">
+                Zaprojektujemy Twój ogród w nowoczesnym stylu i z najlepszym
+                wykorzystaniem istniejącej przestrzeni.
+              </div>
+            </div>
+          </div>
+          <a
+            href="#"
+            class="text-green border-green flex items-center gap-[10px] border-b-[1px] text-base"
+          >
+            Dowiedz się więcej
+            <img
+              src="assets/images/icons/arrow-tiny.png"
+              alt="arrow icon"
+              class="h-4 w-4 -rotate-90"
+            />
+          </a>
+        </swiper-slide>
+        <swiper-slide
+          class="m-2 flex h-[370px] min-w-[286px] max-w-xs flex-col items-start justify-between rounded-[28px] bg-white px-10 py-12 duration-300 hover:shadow-md"
+        >
+          <div class="flex flex-col items-start gap-8">
+            <img
+              src="assets/images/icons/visualization.png"
+              alt="visualization icon"
+              class="h-11 w-11 object-contain"
+            />
+            <div class="flex flex-col gap-3">
+              <div
+                class="font-serif text-[28px] font-medium leading-[115%] tracking-[-1.4px]"
+              >
+                Wizualizacje
+              </div>
+              <div class="text-sm tracking-[-0.14px]">
+                Przedstawimy Ci projekty koncepcyjne w postaci wirtualnego
+                spaceru animowanego w technologii 3D.
+              </div>
+            </div>
+          </div>
+          <a
+            href="#"
+            class="text-green border-green flex items-center gap-[10px] border-b-[1px] text-base"
+          >
+            Dowiedz się więcej
+            <img
+              src="assets/images/icons/arrow-tiny.png"
+              alt="arrow icon"
+              class="h-4 w-4 -rotate-90"
+            />
+          </a>
+        </swiper-slide>
+        <swiper-slide
+          class="m-2 mr-6 flex h-[370px] min-w-[286px] max-w-xs flex-col items-start justify-between rounded-[28px] bg-white px-10 py-12 duration-300 hover:shadow-md"
+        >
+          <div class="flex flex-col items-start gap-8">
+            <img
+              src="assets/images/icons/realization.png"
+              alt="realization icon"
+              class="h-11 w-11 object-contain"
+            />
+            <div class="flex flex-col gap-3">
+              <div
+                class="font-serif text-[28px] font-medium leading-[115%] tracking-[-1.4px]"
+              >
+                Realizacje
+              </div>
+              <div class="text-sm tracking-[-0.14px]">
+                Zrealizujemy Twoje marzenie przy użyciu najnowszych rozwiązań i
+                zaawansowanych technologii.
+              </div>
+            </div>
+          </div>
+          <a
+            href="#"
+            class="text-green border-green flex items-center gap-[10px] border-b-[1px] text-base"
+          >
+            Dowiedz się więcej
+            <img
+              src="assets/images/icons/arrow-tiny.png"
+              alt="arrow icon"
+              class="h-4 w-4 -rotate-90"
+            />
+          </a>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+
+    <div class="bg-green flex w-full flex-col items-center sm:flex-row">
+      <img
+        src="assets/images/about-us.jpg"
+        alt="photo of a garden"
+        class="h-2/5 w-full select-none object-cover sm:h-[720px] sm:w-2/5 lg:w-1/2"
+      />
+      <div
+        class="flex w-full flex-col items-center gap-12 px-4 py-6 sm:w-3/5 sm:gap-[72px] sm:p-6 lg:w-1/2"
+      >
+        <div class="flex max-w-[500px] flex-col gap-4" data-aos="fade-right">
+          <h2 class="text-grey text-xs leading-[-0.12px]">O firmie</h2>
+          <div class="flex flex-col items-start gap-10">
+            <h3
+              class="text-grey font-serif text-4xl font-medium leading-[115%] tracking-[-1.44px] sm:text-5xl"
+            >
+              Tworzymy <br />
+              z <span class="italic">pasją</span>
+            </h3>
+            <p class="text-grey text-sm tracking-[-0.16px] sm:text-base">
+              Każdy projekt to nowe wyzwanie. Dlatego nasz zespół tworzą
+              wykwalifikowani projektanci oraz architekci, których zadaniem jest
+              rozpoznanie i realizacja potrzeb każdego Klienta. Nasza
+              specjalizacja to przestrzenie nowoczesne, które charakteryzuje
+              minimalizm, geometria i elegancka prostota. Tworzymy ogrody
+              małoobsługowe, dostosowane do współczesnego trybu życia.
+            </p>
+          </div>
+        </div>
+        <div class="w-full max-w-[500px]">
+          <a
+            href="#"
+            class="border-grey text-grey w-sm-btn hover:text-green group flex select-none items-center justify-center gap-2 rounded-full border-[1px] px-6 pb-[14px] pt-3 text-base duration-300 hover:bg-white sm:w-fit"
+            data-aos="slide-up"
+          >
+            Poznaj nas bliżej
+            <img
+              src="assets/images/icons/arrow-tiny.png"
+              alt="arrow icon"
+              class="h-4 w-4 -rotate-90 brightness-0 invert group-hover:brightness-100 group-hover:invert-0"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bg-beige flex w-full flex-col items-center gap-12 py-6 sm:gap-24 sm:pb-11 sm:pt-[120px]"
+    >
+      <div
+        class="flex w-full max-w-[1000px] flex-col items-start gap-4 px-6"
+        data-aos="fade-right"
+      >
+        <h2 class="text-green text-xs leading-[-0.12px]">Realizacje</h2>
+        <h3
+          class="font-serif text-4xl font-medium leading-[115%] tracking-[-1.44px] sm:text-5xl"
+        >
+          Nasze <span class="italic">projekty</span>
+        </h3>
+      </div>
+      <div
+        class="relative max-h-[1475px] w-full overflow-hidden px-4 pb-9 duration-700 sm:px-0"
+        id="gallery"
+        data-aos="slide-up"
+      >
+        <div
+          class="galery-gradient absolute bottom-0 z-[2] h-[1000px] w-full"
+          id="gallery-gradient"
+        ></div>
+        <div id="macy-container">
+          <a href="assets/images/gallery/photo1.jpg" data-fancybox="gallery"
+            ><img src="assets/images/gallery/photo1.jpg"
+          /></a>
+          <a href="assets/images/gallery/photo6.jpg" data-fancybox="gallery"
+            ><img src="assets/images/gallery/photo6.jpg"
+          /></a>
+          <a href="assets/images/gallery/photo2.jpg" data-fancybox="gallery"
+            ><img src="assets/images/gallery/photo2.jpg"
+          /></a>
+          <a href="assets/images/gallery/photo3.jpg" data-fancybox="gallery"
+            ><img src="assets/images/gallery/photo3.jpg"
+          /></a>
+          <a href="assets/images/gallery/photo4.jpg" data-fancybox="gallery"
+            ><img src="assets/images/gallery/photo4.jpg"
+          /></a>
+          <a href="assets/images/gallery/photo5.jpg" data-fancybox="gallery"
+            ><img src="assets/images/gallery/photo5.jpg"
+          /></a>
+          <a href="assets/images/gallery/photo7.jpg" data-fancybox="gallery"
+            ><img src="assets/images/gallery/photo7.jpg"
+          /></a>
+          <a href="assets/images/gallery/photo8.jpg" data-fancybox="gallery"
+            ><img src="assets/images/gallery/photo8.jpg"
+          /></a>
+          <a href="assets/images/gallery/photo9.jpg" data-fancybox="gallery"
+            ><img src="assets/images/gallery/photo9.jpg"
+          /></a>
+          <a href="assets/images/gallery/photo10.jpg" data-fancybox="gallery"
+            ><img src="assets/images/gallery/photo10.jpg"
+          /></a>
+          <a href="assets/images/gallery/photo11.jpg" data-fancybox="gallery"
+            ><img src="assets/images/gallery/photo11.jpg"
+          /></a>
+        </div>
+        <a
+          class="hover:text-grey group absolute bottom-0 left-1/2 z-[3] flex -translate-x-1/2 select-none items-center justify-center gap-2 rounded-full border-[1px] border-black px-6 pb-[14px] pt-3 text-base text-black duration-300 hover:bg-black"
+          id="expand-button"
+        >
+          <span id="expand-button-text">Rozwiń</span>
+          <img
+            src="assets/images/icons/arrow-tiny.png"
+            alt="download icon"
+            class="h-4 w-4 brightness-0 group-hover:invert"
+            id="expand-button-icon"
+          />
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="bg-grey flex w-full flex-col items-center justify-center p-4 sm:px-6 sm:py-[60px]"
+    >
+      <div
+        class="bg-green flex w-full flex-col items-center justify-between gap-9 p-4 sm:flex-row sm:gap-16 sm:px-6 sm:py-[120px]"
+      >
+        <div
+          class="text-grey font-serif text-4xl leading-[120%] tracking-[-2px] sm:text-[40px]"
+          data-aos="slide-right"
+        >
+          Zostańmy w kontakcie!<br />Znajdziesz nas na
+          <span class="italic">Instagramie</span>.
+        </div>
+        <div
+          class="flex w-full flex-col items-start gap-6 sm:w-40"
+          data-aos="slide-left"
+        >
+          <div class="text-grey uracking-[-0.16px] text-sm sm:text-base">
+            Śledź nasze najnowsze realizacje!
+          </div>
+          <a
+            href="#"
+            class="border-grey w-sm-btn text-green hover:bg-green hover:text-grey flex select-none items-center justify-center gap-2 rounded-full border-[1px] bg-white px-6 pb-[14px] pt-3 text-base duration-300 sm:w-fit"
+            >Instagram</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <footer
+      class="flex flex-col items-center gap-16 bg-black px-4 py-6 sm:gap-[120px] sm:px-6 sm:py-20"
+    >
+      <div class="flex w-full max-w-[1040px] flex-col gap-12 lg:gap-16">
+        <div
+          class="flex w-full flex-col items-center justify-between gap-12 lg:flex-row lg:gap-0"
+        >
+          <a href="#"
+            ><img
+              src="assets/images/logos/logo.png"
+              alt="Company Logo"
+              class="flex h-5 w-auto select-none invert"
+          /></a>
+          <div class="flex flex-col items-center gap-6 lg:flex-row">
+            <div class="text-grey text-base tracking-[-0.16px]">
+              Daj znać, co możemy dla Ciebie zrobić!
+            </div>
+            <a
+              href="#"
+              class="bg-green text-grey hover:text-green flex select-none items-center justify-center gap-2 rounded-full px-6 pb-[14px] pt-3 text-base duration-300 hover:bg-white"
+              >Skontaktuj się z nami</a
+            >
+          </div>
+        </div>
+        <hr class="bg-grey h-[1px] w-full border-none" />
+        <div
+          class="flex items-end justify-between gap-12 lg:items-baseline lg:gap-0"
+        >
+          <div class="flex select-none flex-col gap-4 lg:flex-row lg:gap-12">
+            <a
+              href="#"
+              class="text-grey text-base tracking-[-0.16px] duration-300 hover:opacity-80"
+              >Kontakt</a
+            >
+            <a
+              href="#"
+              class="text-grey text-base tracking-[-0.16px] duration-300 hover:opacity-80"
+              >Instagram</a
+            >
+            <a
+              href="#"
+              class="text-grey text-base tracking-[-0.16px] duration-300 hover:opacity-80"
+              >Facebook</a
+            >
+            <a
+              href="#"
+              class="text-grey text-base tracking-[-0.16px] duration-300 hover:opacity-80"
+              >LinkedIn</a
+            >
+          </div>
+          <div class="flex flex-col items-end gap-4 lg:flex-row lg:gap-12">
+            <a
+              href="tel:000-000-000"
+              class="text-grey text-base tracking-[-0.16px] duration-300 hover:opacity-80"
+              >000-000-000</a
+            >
+            <a
+              href="mailto:giarddesign@kontakt.pl"
+              class="text-grey text-base tracking-[-0.16px] duration-300 hover:opacity-80"
+              >giarddesign@kontakt.pl</a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex w-full max-w-[1040px] flex-col items-center justify-center gap-6 sm:flex-row sm:justify-between sm:gap-0"
+      >
+        <div class="text-grey text-base tracking-[-0.16px]">
+          Prawa zastrzeżone © 2022
+        </div>
+        <div
+          class="text-grey flex select-none items-center gap-4 text-base tracking-[-0.16px]"
+        >
+          made by
+          <a href="#"
+            ><img
+              src="assets/images/logos/adrespect.png"
+              alt="Made By Logo"
+              class="flex h-[23px] w-[113px]"
+          /></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+      disable: "mobile",
+    });
+
+    // Initialize Macy
+    var masonry = new Macy({
+      container: "#macy-container",
+      mobileFirst: true,
+      columns: 1,
+      margin: {
+        y: 42,
+        x: 42,
+      },
+      breakAt: {
+        1024: 3,
+        640: 2,
+      },
+    });
+
+    // Gallery and expand button interactions
+    const galleryContainer = document.getElementById("gallery");
+    const gradientOverlay = document.getElementById("gallery-gradient");
+    const expandButton = document.getElementById("expand-button");
+    const arrowIcon = document.getElementById("expand-button-icon");
+    const buttonText = document.getElementById("expand-button-text");
+
+    expandButton.addEventListener("click", () => {
+      const galleryHeight = galleryContainer.scrollHeight;
+      galleryContainer.classList.toggle(`max-h-[${galleryHeight}px]`);
+      gradientOverlay.classList.toggle("opacity-0");
+      gradientOverlay.classList.toggle("hidden");
+      arrowIcon.classList.toggle("rotate-180");
+      buttonText.innerText = galleryContainer.classList.contains(
+        `max-h-[${galleryHeight}px]`,
+      )
+        ? "Zwiń"
+        : "Rozwiń";
+    });
+
+    // Menu interactions
+    const menuButton = document.getElementById("menu");
+    const searchButton = document.getElementById("search");
+    const hamburgerIcon = document.getElementById("hamburger");
+    const closeIcon = document.getElementById("close");
+    const overlayMenu = document.getElementById("overlay-menu");
+
+    menuButton.addEventListener("click", () => {
+      search.classList.toggle("hidden");
+      hamburgerIcon.classList.toggle("hidden");
+      closeIcon.classList.toggle("hidden");
+      overlayMenu.classList.toggle("z-10");
+      overlayMenu.classList.toggle("h-full");
+      document.body.classList.toggle("overflow-hidden");
+    });
+
+    // Offer interactions
+    const offerButton = document.getElementById("menu-offer");
+    const offerOverlay = document.getElementById("overlay-offer");
+
+    offerButton.addEventListener("click", () => {
+      offerOverlay.classList.toggle("z-10");
+      offerOverlay.classList.toggle("h-[72px]");
+    });
+
+    const mobileOfferButton = document.getElementById("mobile-menu-offer");
+    const offerSubMenu = document.getElementById("sub-menu-offer");
+
+    mobileOfferButton.addEventListener("click", () => {
+      offerSubMenu.classList.toggle("hidden");
+      offerSubMenu.classList.toggle("h-fit");
+    });
+
+    // Swiper interactions
+    const swiperHero = document.getElementById("swiper-hero");
+    const swiperNext = document.getElementById("swiper-next");
+    const swiperPrev = document.getElementById("swiper-prev");
+
+    swiperNext.addEventListener("click", () => {
+      swiperHero.swiper.slideNext();
+    });
+
+    swiperPrev.addEventListener("click", () => {
+      swiperHero.swiper.slidePrev();
+    });
+
+    // Expanded search interactions
+    const expandedSearch = document.getElementById("expanded-search");
+    const closeSearch = document.getElementById("close-search");
+
+    function toggleExpandedSearch() {
+      expandedSearch.classList.toggle("lg:w-1/2");
+      expandedSearch.classList.toggle("z-[3]");
+      expandedSearch.classList.toggle("sm:w-3/4");
+      expandedSearch.classList.toggle("w-full");
+    }
+
+    searchButton.addEventListener("click", toggleExpandedSearch);
+    closeSearch.addEventListener("click", toggleExpandedSearch);
+  </script>
+</html>
